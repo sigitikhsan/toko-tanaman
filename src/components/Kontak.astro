@@ -1,0 +1,66 @@
+---
+const nomorWA = import.meta.env.PUBLIC_WA_NUMBER ?? '628000000000';
+---
+
+<section id="kontak" class="py-24 bg-[#1E2923] text-[#F6F3EC]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16 reveal-up">
+      <h2 class="text-4xl md:text-5xl font-serif mb-6">Siap memulai?</h2>
+      <p class="text-lg text-[#F6F3EC]/70 max-w-2xl mx-auto mb-8">
+        Pesan sekarang via WhatsApp. Tim kami siap membantu Anda memilih tanaman yang tepat untuk ruang Anda.
+      </p>
+      <a
+        href={`https://wa.me/${nomorWA}?text=${encodeURIComponent('Halo, saya tertarik untuk memesan tanaman. Bisa kasih rekomendasi?')}`}
+        target="_blank"
+        rel="noopener"
+        class="inline-block bg-[#E07A5F] text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-[#F6F3EC] hover:text-[#1E2923] transition-colors"
+      >
+        Hubungi kami via WhatsApp
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 border-t border-[#F6F3EC]/10 pt-16 reveal-stagger">
+      <div class="stagger-item">
+        <p class="text-xs uppercase tracking-widest text-[#F6F3EC]/50 mb-2">WhatsApp</p>
+        <a
+          href={`https://wa.me/${nomorWA}`}
+          target="_blank"
+          rel="noopener"
+          class="text-2xl font-serif hover:text-[#E07A5F] transition-colors"
+        >
+          +62 800 000 000
+        </a>
+      </div>
+      <div class="stagger-item">
+        <p class="text-xs uppercase tracking-widest text-[#F6F3EC]/50 mb-2">Instagram</p>
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="text-2xl font-serif hover:text-[#E07A5F] transition-colors">
+          @tanaman.toko
+        </a>
+      </div>
+      <div class="stagger-item">
+        <p class="text-xs uppercase tracking-widest text-[#F6F3EC]/50 mb-2">Jam Buka</p>
+        <p class="text-2xl font-serif">Sen–Min, 09:00–18:00</p>
+      </div>
+    </div>
+
+    <div class="mt-16 pt-16 border-t border-[#F6F3EC]/10">
+      <p class="text-sm text-[#F6F3EC]/60 mb-4">Alamat Toko</p>
+      <p class="text-xl font-serif mb-4">
+        Jl. Raya Kebun No. 123<br />
+        Bogor, Jawa Barat 16113
+      </p>
+      <div class="aspect-video rounded-2xl overflow-hidden bg-[#F6F3EC]/10 border border-[#F6F3EC]/20">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.827087862847!2d106.81116!3d-6.596736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c8234234234%3A0x1234567890!2sBogor%2C+West+Java!5e0!3m2!1sen!2sid!4v1234567890"
+          width="100%"
+          height="100%"
+          style="border: 0"
+          allowFullScreen=""
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        >
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>

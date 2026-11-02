@@ -1,0 +1,23 @@
+---
+const navLinks = [
+  { name: 'Produk', href: '#produk' },
+  { name: 'Paket', href: '#paket' },
+  { name: 'Tentang', href: '#tentang' },
+  { name: 'Testimoni', href: '#testimoni' },
+];
+---
+
+<nav class="fixed top-0 w-full z-50 bg-[#F6F3EC]/90 backdrop-blur-sm py-6 border-b border-[#1E2923]/10">
+  <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+    <a href="/" class="text-2xl font-serif font-bold">TokoTanaman</a>
+    
+    <div class="hidden md:flex gap-8 items-center">
+      {navLinks.map(link => (
+        <a href={link.href} class="text-sm font-medium hover:text-[#E07A5F] transition-colors">{link.name}</a>
+      ))}
+      <a href="#kontak" class="bg-[#1E2923] text-white px-5 py-2 rounded-full text-sm hover:bg-[#E07A5F] transition-colors">
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</nav>

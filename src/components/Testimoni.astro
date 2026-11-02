@@ -1,0 +1,36 @@
+---
+import { testimoni } from '../data/testimoni';
+---
+
+<section id="testimoni" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-14 reveal-up">
+      <span class="text-xs tracking-widest uppercase font-semibold text-[#E07A5F]">Koleksi 04</span>
+      <h2 class="text-4xl md:text-5xl font-serif mt-2">Disukai oleh ribuan pemilik tanaman.</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 reveal-stagger">
+      {testimoni.map((t) => (
+        <article class="border border-[#1E2923]/10 rounded-2xl p-8 stagger-item">
+          <p class="text-lg text-[#1E2923]/80 mb-6 italic leading-relaxed">"{t.teks}"</p>
+          <div class="flex items-start gap-4 pt-6 border-t border-[#1E2923]/10">
+            {t.foto && (
+              <img
+                src={t.foto}
+                alt={t.nama}
+                width="56"
+                height="56"
+                class="w-14 h-14 rounded-full object-cover"
+              />
+            )}
+            <div>
+              <p class="font-serif font-medium">{t.nama}</p>
+              <p class="text-sm text-[#1E2923]/50">{t.kota}</p>
+              {t.paket && <p class="text-xs text-[#E07A5F] font-medium mt-1">Paket {t.paket}</p>}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

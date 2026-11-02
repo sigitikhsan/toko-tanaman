@@ -1,0 +1,43 @@
+---
+const keunggulan = [
+  {
+    nomor: "01",
+    judul: "Kualitas Terjamin",
+    deskripsi: "Setiap tanaman melewati seleksi ketat dan dipastikan berakar kuat sebelum dikirim.",
+  },
+  {
+    nomor: "02",
+    judul: "Packing Aman",
+    deskripsi: "Pengemasan khusus melindungi media dan daun agar tetap segar hingga tujuan.",
+  },
+  {
+    nomor: "03",
+    judul: "Panduan Perawatan",
+    deskripsi: "Dapatkan kartu petunjuk dan sesi konsultasi gratis via WhatsApp jika bingung merawat.",
+  },
+  {
+    nomor: "04",
+    judul: "Garansi Pengiriman",
+    deskripsi: "Jika tanaman tiba dalam kondisi rusak parah, kami siap ganti dengan yang baru.",
+  },
+];
+---
+
+<section class="py-20 border-t border-[#1E2923]/10">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="mb-12 reveal-up">
+      <span class="text-xs tracking-widest uppercase font-semibold text-[#E07A5F]">Kenapa Kami</span>
+      <h2 class="text-3xl md:text-4xl font-serif mt-2">Merawat dengan hati, mengirim dengan aman.</h2>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-8 reveal-stagger">
+      {keunggulan.map((item) => (
+        <div class="border-t border-[#1E2923]/20 pt-4 stagger-item">
+          <span class="text-xs font-mono text-[#1E2923]/40 block mb-2">{item.nomor}</span>
+          <h3 class="text-xl font-serif mb-2">{item.judul}</h3>
+          <p class="text-sm text-[#1E2923]/70 leading-relaxed">{item.deskripsi}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

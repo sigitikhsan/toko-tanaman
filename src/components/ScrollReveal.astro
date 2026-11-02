@@ -1,0 +1,46 @@
+<script>
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    const targets = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        '.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-stagger .stagger-item, .package-cards > .package-card',
+      ),
+    );
+
+    targets.forEach((element) => {
+      if (element.matches('.package-card')) {
+        const siblings = Array.from(
+          element.parentElement?.querySelectorAll<HTMLElement>(':scope > .package-card') ?? [],
+        );
+        element.style.setProperty('--reveal-delay', `${siblings.indexOf(element) * 100}ms`);
+        return;
+      }
+
+      if (element.closest('.reveal-stagger')) {
+        const siblings = Array.from(
+          element.parentElement?.querySelectorAll<HTMLElement>('.stagger-item') ?? [],
+        );
+        element.style.setProperty('--reveal-delay', `${siblings.indexOf(element) * 100}ms`);
+      }
+    });
+
+    if (targets.length > 0) {
+      document.documentElement.classList.add('motion-ready');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+      );
+
+      targets.forEach((element) => observer.observe(element));
+    }
+  }
+</script>

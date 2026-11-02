@@ -1,0 +1,68 @@
+---
+const faqList = [
+  {
+    id: "pengiriman",
+    q: "Berapa lama pengiriman?",
+    a: "Pesanan diproses hari Senin–Jumat. Pengiriman ke Jabodetabek 1–2 hari kerja, area lain 2–4 hari kerja (via kurir terpercaya).",
+  },
+  {
+    id: "jaminan",
+    q: "Bagaimana jika tanaman rusak saat pengiriman?",
+    a: "Kami memberikan jaminan penggantian 100% jika tanaman tiba dalam kondisi rusak parah. Cukup foto dan kirim via WhatsApp dalam 24 jam pertama.",
+  },
+  {
+    id: "perawatan",
+    q: "Saya pemula, apakah bisa pesan?",
+    a: "Tentu! Semua paket dilengkapi kartu panduan perawatan. Anda juga bisa konsultasi gratis via WhatsApp untuk pertanyaan seputar cahaya, air, dan pupuk.",
+  },
+  {
+    id: "garansi",
+    q: "Apakah ada garansi tanaman setelah diterima?",
+    a: "Garansi berlaku 7 hari sejak diterima untuk tanaman rusak/mati saat tiba. Untuk masalah perawatan, konsultasikan dengan kami—kami siap bantu.",
+  },
+  {
+    id: "pembayaran",
+    q: "Metode pembayaran apa yang diterima?",
+    a: "Transfer bank, e-wallet, dan COD untuk area tertentu. Detail lengkap akan kami bagikan via WhatsApp setelah Anda pesan.",
+  },
+  {
+    id: "customisasi",
+    q: "Bisa pesan paket custom atau kado khusus?",
+    a: "Bisa! Hubungi kami via WhatsApp untuk diskusi detail, foto referensi, dan harga khusus.",
+  },
+];
+---
+
+<section class="py-24 bg-[#1E2923]/5">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="mb-12 reveal-up">
+      <span class="text-xs tracking-widest uppercase font-semibold text-[#E07A5F]">FAQ</span>
+      <h2 class="text-4xl md:text-5xl font-serif mt-2">Pertanyaan yang Sering Diajukan</h2>
+    </div>
+
+    <div class="space-y-3 reveal-stagger">
+      {faqList.map((item) => (
+        <details class="group border border-[#1E2923]/10 rounded-2xl overflow-hidden stagger-item">
+          <summary class="flex items-center justify-between p-6 cursor-pointer hover:bg-[#1E2923]/3 transition-colors">
+            <h3 class="font-serif text-lg">{item.q}</h3>
+            <span class="text-2xl text-[#E07A5F] group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <div class="px-6 pb-6 border-t border-[#1E2923]/10 bg-[#1E2923]/2">
+            <p class="text-[#1E2923]/70 leading-relaxed">{item.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <div class="mt-12 p-6  rounded-2xl text-center">
+      <p class="text-sm text-[#1E2923]/70 mb-3">Pertanyaan lain?</p>
+      <p class="font-serif text-xl mb-4">Hubungi kami langsung via WhatsApp</p>
+      <a
+        href="#kontak"
+        class="inline-block bg-[#E07A5F] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#1E2923] transition-colors"
+      >
+        Chat Sekarang
+      </a>
+    </div>
+  </div>
+</section>

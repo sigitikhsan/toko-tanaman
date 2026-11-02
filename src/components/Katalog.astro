@@ -1,0 +1,103 @@
+---
+import { produk } from '../data/product';
+import { formatRupiah } from '../data/paket';
+
+const kategoriList = [
+  { id: 'semua', label: 'Semua' },
+  { id: 'indoor', label: 'Indoor' },
+  { id: 'outdoor', label: 'Outdoor' },
+  { id: 'sukulen', label: 'Kaktus & Sukulen' },
+  { id: 'perlengkapan', label: 'Perlengkapan' },
+] as const;
+
+const nomorWA = import.meta.env.PUBLIC_WA_NUMBER ?? '628000000000';
+---
+
+<section id="produk" class="py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between mb-12 reveal-up">
+      <div>
+        <span class="text-xs tracking-widest uppercase font-semibold text-[#E07A5F]">Koleksi 02</span>
+        <h2 class="text-4xl md:text-5xl font-serif mt-2">Tanaman pilihan,<br />siap menghuni ruang Anda.</h2>
+      </div>
+      <div class="flex gap-2 overflow-x-auto pb-2 md:justify-end" role="group" aria-label="Filter kategori produk">
+        {kategoriList.map((kat, i) => (
+          <button
+            type="button"
+            class:list={[
+              'px-4 py-1.5 rounded-full border text-sm whitespace-nowrap transition-colors',
+              i === 0
+                ? 'border-[#1E2923] bg-[#1E2923] text-white'
+                : 'border-[#1E2923]/20 hover:border-[#1E2923]',
+            ]}
+            data-filter={kat.id}
+            aria-pressed={i === 0 ? 'true' : 'false'}
+          >
+            {kat.label}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 reveal-stagger">
+      {produk.map((p) => (
+        <article class="group stagger-item" data-kategori={p.kategori}>
+          <a href={`https://wa.me/${nomorWA}?text=${encodeURIComponent(`Halo, saya tertarik dengan ${p.nama} (${formatRupiah(p.harga)}). Apakah masih tersedia?`)}`} class="block" target="_blank" rel="noopener">
+            <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-[#1E2923]/5 border border-[#1E2923]/10">
+              <img
+                src={p.gambar}
+                alt={p.alt}
+                width="600"
+                height="750"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
+            </div>
+          </a>
+          <div class="mt-4 flex items-start justify-between gap-4">
+            <div>
+              <h3 class="text-xl font-serif">{p.nama}</h3>
+              {p.namaLatin && <p class="text-xs italic text-[#1E2923]/50">{p.namaLatin}</p>}
+              <p class="text-sm text-[#1E2923]/60 mt-1">{p.ukuran} · {p.cahaya}</p>
+            </div>
+            <p class="text-sm font-medium whitespace-nowrap">{formatRupiah(p.harga)}</p>
+          </div>
+          <a
+            href={`https://wa.me/${nomorWA}?text=${encodeURIComponent(`Halo, saya tertarik dengan ${p.nama} (${formatRupiah(p.harga)}). Apakah masih tersedia?`)}`}
+            target="_blank"
+            rel="noopener"
+            class="inline-block mt-3 text-sm font-medium border-b border-[#E07A5F] text-[#E07A5F] hover:text-[#1E2923] hover:border-[#1E2923] transition-colors"
+          >
+            Tanya via WhatsApp
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const tombol = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const kartu = document.querySelectorAll<HTMLElement>('[data-kategori]');
+
+  tombol.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+
+      tombol.forEach((b) => {
+        b.classList.remove('border-[#1E2923]', 'bg-[#1E2923]', 'text-white');
+        b.classList.add('border-[#1E2923]/20');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('border-[#1E2923]', 'bg-[#1E2923]', 'text-white');
+      btn.classList.remove('border-[#1E2923]/20');
+      btn.setAttribute('aria-pressed', 'true');
+
+      kartu.forEach((k) => {
+        const cocok = filter === 'semua' || k.dataset.kategori === filter;
+        k.classList.toggle('hidden', !cocok);
+      });
+    });
+  });
+</script>
