@@ -11,6 +11,7 @@ const navLinks = [
   <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
     <a href="/" class="text-2xl font-serif font-bold">TokoTanaman</a>
     
+    <!-- Desktop Menu -->
     <div class="hidden md:flex gap-8 items-center">
       {navLinks.map(link => (
         <a href={link.href} class="text-sm font-medium hover:text-[#E07A5F] transition-colors">{link.name}</a>
@@ -19,5 +20,138 @@ const navLinks = [
         WhatsApp
       </a>
     </div>
+
+    <!-- Hamburger Button (Mobile) -->
+    <button 
+      id="menu-toggle" 
+      class="md:hidden flex flex-col gap-1.5 p-2 hamburger"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Drawer -->
+  <div 
+    id="mobile-menu" 
+    class="md:hidden mobile-menu"
+  >
+    <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col gap-4">
+      {navLinks.map(link => (
+        <a 
+          href={link.href} 
+          class="text-sm font-medium py-2 text-[#1E2923] hover:text-[#E07A5F] transition-colors mobile-menu-link"
+          data-menu-link
+        >
+          {link.name}
+        </a>
+      ))}
+      <a 
+        href="#kontak" 
+        class="bg-[#1E2923] text-white px-5 py-2 rounded-full text-sm hover:bg-[#E07A5F] transition-colors text-center mobile-menu-link"
+        data-menu-link
+      >
+        WhatsApp
+      </a>
+    </div>
   </div>
 </nav>
+
+<style>
+  /* Hamburger lines */
+  .hamburger-line {
+    width: 24px;
+    height: 2px;
+    background-color: #1E2923;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  /* Hamburger active state */
+  .hamburger.active .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    background-color: #F6F3EC;
+    border-bottom: 1px solid rgba(30, 41, 35, 0.1);
+    transition: max-height 0.3s ease-out;
+  }
+
+  .mobile-menu.open {
+    max-height: 400px;
+  }
+
+  /* Mobile menu links fade-in */
+  .mobile-menu-link {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .mobile-menu.open .mobile-menu-link {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-menu.open .mobile-menu-link:nth-child(1) { transition-delay: 0.05s; }
+  .mobile-menu.open .mobile-menu-link:nth-child(2) { transition-delay: 0.1s; }
+  .mobile-menu.open .mobile-menu-link:nth-child(3) { transition-delay: 0.15s; }
+  .mobile-menu.open .mobile-menu-link:nth-child(4) { transition-delay: 0.2s; }
+  .mobile-menu.open .mobile-menu-link:nth-child(5) { transition-delay: 0.25s; }
+</style>
+
+<script>
+  // Hamburger menu toggle - minimal JS
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuLinks = document.querySelectorAll('[data-menu-link]');
+
+  // Toggle menu
+  menuToggle?.addEventListener('click', () => {
+    const isOpen = menuToggle.classList.contains('active');
+    
+    if (isOpen) {
+      menuToggle.classList.remove('active');
+      mobileMenu?.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    } else {
+      menuToggle.classList.add('active');
+      mobileMenu?.classList.add('open');
+      menuToggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // Close menu when clicking a link
+  menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle?.classList.remove('active');
+      mobileMenu?.classList.remove('open');
+      menuToggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!menuToggle?.contains(target) && !mobileMenu?.contains(target)) {
+      menuToggle?.classList.remove('active');
+      mobileMenu?.classList.remove('open');
+      menuToggle?.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
